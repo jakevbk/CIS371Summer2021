@@ -40,10 +40,10 @@ router.get('/users/:userid', function (req, res){
 
 
 //put info about user (upadate) users/{id}
-router.post('/users/:userid', function (req, res){
+router.put('/users/:userid', function (req, res){
 	console.log('got a request to update user id # ' + req.params.userid);
         let sql = 'UPDATE user SET firstName= (?), lastName= (?), email= (?), password= (?), joinedDate=(?) WHERE id = (?)';
-	db.all(sql, [req.body.firstName, req.body.lastName, req.body.email, req.body.password, Date.now(), req.params.userid],function(err,rows){
+	db.run(sql, [req.body.firstName, req.body.lastName, req.body.email, req.body.password, Date.now(), req.params.userid],function(err,rows){
                 if(err){
 			console.log(err.message);
 		}{

@@ -40,10 +40,10 @@ router.get('/posts/:postId', function (req, res){
 
 
 //put info about post posts/{id}
-router.post('/posts/:postId', function (req, res){
+router.put('/posts/:postId', function (req, res){
         console.log('got a request to update post id # ' + req.params.postId);
 	let sql = 'UPDATE post SET text= (?), timestamp= (?) WHERE postId = (?)';
-	db.all(sql, [ req.body.text, Date.now(), req.params.postId ], function (err, rows){
+	db.run(sql, [ req.body.text, Date.now(), req.params.postId ], function (err, rows){
                 if(err){
 			console.log(err.message);
 		}{
