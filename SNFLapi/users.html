@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<script src="https://unpkg.com/vue@next"></script>
+		<title>List 'em</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">                                                                                                                       <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+	</head>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="posts.html">Home</a></li>
+				<li><a href="users.html">List Users</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+
+	<body>
+		Click on the hyperlink to modify users information. You will be redirected.
+		<ul id='users-list'>
+			<li class='user' v-for='user in users' :key='user.id'>
+				<a href= "mod.html">
+					The id for {{ user.firstName }} {{user.lastName}} is {{ user.id }} </a>
+			</li>
+		</ul>
+	</body>
+<style>
+.user {
+	background-color: yellow;
+}
+</style>
+	<script>
+		fetch('http://35.39.165.235:3500/users')
+	.then(data => data.json() )
+	.then(json => {
+		console.log(json);
+		Vue.createApp({
+			data(){
+				return {
+					users: json
+				}
+			}
+		}).mount('#users-list');
+	});
+	</script>
+</html>

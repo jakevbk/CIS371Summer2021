@@ -1,0 +1,102 @@
+header, footer {
+	height: 80px;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 0 25px 0 black;
+}
+
+header * {
+	display: inline;
+}
+
+h1{
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+h2{
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	font-size: 1.25em;
+}
+
+header img {
+	height: 80px;
+	margin-left: 20px;
+}
+
+footer {
+	padding-left: 5px;
+	color: #222;
+	text-decoration: none;
+	font-family: 'Pattaya', sans-serif;
+	font-size: 1.5em;
+}
+
+header li {
+	margin: 15px;
+}
+
+header li a {
+	color: rgb(96, 100, 160);
+	text-decoration: none;
+	font-family: 'Pattaya', sans-serif;
+	font-weight: 300;
+	font-size: 1.25em;
+}
+
+header li a:hover {
+	background-color: #a40000;
+	color: #fff;
+}
+
+section {
+	height: 85vh;
+	width: 100%;
+	background-image: url('http://35.39.165.235/images/Background.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	/* via https://commons.wikimedia.org/wiki/File:Beagle_Dogs.jpg
+	attribution: Robertmugabe1
+	*/
+}
+
+
+section div {
+	display: block;
+	float: left;
+}
+
+.blurb {
+	float: left;
+	padding: 15px;
+	width: 250px;
+	height: 200px;
+	background-color: #ffffffb9;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	margin: 5px;
+}
+
+.pictures {
+	display: flex;
+	justify-content: center;
+}
+
+.picture {
+	padding: 10px;
+}
+
+.picture img {
+	height: 500px;
+	width: 450px;
+}
+
+.AllAboutUs {
+	padding: 10px;
+	text-align: center;
+}

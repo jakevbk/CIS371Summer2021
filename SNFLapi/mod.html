@@ -1,0 +1,114 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<script src="library.js"></script>
+		<script src="https://unpkg.com/vue@next"></script>
+		<title>Admin User Page</title>
+
+                <link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+	</head>
+
+        <header>
+		<nav>
+			<ul>
+				<li><a href="posts.html">Home</a></li>
+				<li><a href="users.html">List Users</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<body>
+		<ul id='users-list'>
+			<li class='user' v-for='user in users' :key='user.id'>
+				{{ user.firstName}} {{user.lastName}} has id {{ user.id }}
+			</li>
+		</ul>
+		<form action="" method="get" class="form-example">
+			<div class="form-example">
+				<label for="userID">User ID to Change:</label>
+				<input type="text" id="userID" name="userID" required>
+			</div>
+			<div class="form-example">
+				<label for="firstName">Enter first name: </label>
+				<input type="text=" name= "firstN" id="firstN" required>
+			</div>
+			 <div class="form-example">
+				 <label for="lastName">Enter last name: </label>
+				 <input type="text=" name= "lastN" id="lastN" required>
+			 </div>
+			<div class="form-example">
+		        	<label for="pass">Enter new password: </label>
+				<input type="text=" name= "pass" id="pass" required>
+			</div>
+			<div class="form-exmaple">
+				<label for="email">Enter your email: </label>
+				<input type="email" name="email" id="email"required>
+				<input type="button" name="submit" value="MODIFY!" onclick="sendRequest()">
+			</div>
+		</form>
+		<div id='newUser'>
+			<p>{{user}}</p>
+		</div>
+					
+	</body>
+	<script>
+		fetch('http://35.39.165.235:3500/users')
+	.then(data => data.json() )
+	.then(json => {
+		console.log(json);
+		Vue.createApp({
+			data(){
+				return {
+					users: json
+				}
+			}
+		}).mount('#users-list');
+	});
+	const queryString = window.location.search;
+	const urlParam = new URLSearchParams(queryString);
+	const idChange = urlParam.get('id');
+	console.log('idChange');
+	window.onload = function (){
+		document.getElementById('userID').value = idChange
+	};	
+	
+	function sendRequest() {
+		const http = new EasyHTTP;
+		var userID = document.getElementById("userID").value;
+		console.log(userID);
+		var firstN = document.getElementById("firstN").value;
+		console.log(firstN);
+		var lastN = document.getElementById("lastN").value;
+		console.log(lastN);
+		var eMail = document.getElementById("email").value;
+		console.log(eMail);
+		var pass = document.getElementById("pass").value;
+		console.log(pass);
+		
+		const sendData = {
+			firstName: firstN,
+			lastName: lastN,
+			email: eMail,
+			password: pass
+		}
+
+		http.put('http://35.39.165.235:3500/users/' + userID, sendData)
+			.then(data =>{
+				console.log(data);
+				Vue.createApp({
+					data() {
+						return{
+							user: data
+						}
+					}
+				}).mount('#newUser');
+			});
+	}
+	</script>
+</html>

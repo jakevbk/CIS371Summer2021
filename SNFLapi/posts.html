@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<script src="https://unpkg.com/vue@next"></script>
+		<title>SNFL Homepage</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">															   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+	</head>
+
+	<header>
+		<nav>
+			<ul>
+				<li><a href="posts.html">Home</a></li>
+				<li><a href="users.html">List Users</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<body>
+		<ul id='posts-list'>
+			<li class='post' v-for='post in posts' :key='post.postId'>
+				{{ post.text}} was posted at  {{post.timestamp}} by user {{ post.userId }}
+			</li>
+		</ul>
+	</body>
+<style>
+.post {
+	border: 1px dotted;
+	background-color: yellow;
+}
+</style>
+	<script>
+		fetch('http://35.39.165.235:3500/posts')
+	.then(data => data.json() )
+	.then(json => {
+		console.log(json);
+		Vue.createApp({
+			data(){
+				return {
+					posts: json
+				}
+			}
+		}).mount('#posts-list');
+	});
+	</script>
+</html>

@@ -61,7 +61,7 @@ router.put('/users/:userid', function (req, res){
 router.delete('/users/:userid', function(req, res){
 	console.log("attempt to delete user id " + req.params.userid);
 	let sql = 'DELETE FROM user WHERE id = (?)';
-	db.run(sql,[req.params.userid], function(err, rows){
+	db.run(sql,[req.params.userid], function(err){
 		if(err){
 			console.log(err.message);
 		}else{
@@ -74,7 +74,7 @@ router.delete('/users/:userid', function(req, res){
 //create a new user
 router.post('/users', function (req, res){
 	let sql = 'INSERT INTO user (firstName, lastName, email, password, joinedDate) VALUES ( (?), (?), (?), (?), (?) )';  
-	db.run(sql, [ req.body.firstName, req.body.lastName, req.body.email, req.body.password, Date.now() ], function (err){
+	db.run(sql, [ req.body.firstName, req.body.lastName, req.body.email, req.body.password, Date.now()], function (err){
                if(err){
                   console.log(err.message);
 	       } else {
